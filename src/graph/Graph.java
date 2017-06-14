@@ -14,10 +14,6 @@ import java.util.*;
 public class Graph {
     
     private Set<Node> nodes = new HashSet<>();
-     
-    public void addNode(Node nodeA) {
-        nodes.add(nodeA);
-    }
  
     // getters and setters
 
@@ -27,6 +23,16 @@ public class Graph {
 
     public void setNodes(Set<Node> nodes) {
         this.nodes = nodes;
+    }
+    
+    //Other Functions
+    
+    /**
+     * Function to add a new node to the graph
+     * @param nodeA Node to be inserted
+     */
+    public void addNode(Node nodeA) {
+        nodes.add(nodeA);
     }
     
     

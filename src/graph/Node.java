@@ -5,6 +5,7 @@
  */
 package graph;
 
+import decks.TypePlace;
 import java.util.*;
 
 /**
@@ -13,8 +14,9 @@ import java.util.*;
  */
 public class Node {
     
-    private String Place;
-    private String Thumbnail; //Tiene que ser el thumbnail del lugar
+    private String Place; //Name of the Place to visit
+    private String Thumbnail; //Tiene que ser el thumbnail del lugar -> URL
+    private TypePlace Type; //Type of place to visit -> to know if its valid for 
     
     private List<Node> shortestPath = new LinkedList<>();
      

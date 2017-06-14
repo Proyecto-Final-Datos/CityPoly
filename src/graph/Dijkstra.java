@@ -39,6 +39,11 @@ public class Dijkstra {
         return graph;
     }
     
+    /**
+     * Function to get the lowest distance 
+     * @param unsettledNodes
+     * @return 
+     */
     private static Node getLowestDistanceNode(Set < Node > unsettledNodes) {
         Node lowestDistanceNode = null;
         int lowestDistance = Integer.MAX_VALUE;

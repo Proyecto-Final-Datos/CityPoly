@@ -5,9 +5,9 @@
  */
 package googleplaces;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.*;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
 //import android.util.Log;
 
