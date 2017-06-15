@@ -31,7 +31,6 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButtonDesafios = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -44,6 +43,7 @@ public class CityPoly extends javax.swing.JFrame {
         ciudadField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         retoField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
         LabelMainI = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,12 +51,12 @@ public class CityPoly extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1250, 740));
         setPreferredSize(new java.awt.Dimension(1250, 740));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 50, 100, 30));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, 100, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Jugador 2");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 20, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,21 +69,6 @@ public class CityPoly extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, 30));
-
-        jPanel1.setBackground(new java.awt.Color(3, 25, 36));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 920, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 920, 510));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/coollogo_com-36272774.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
@@ -112,14 +97,14 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estrellas");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 90, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 90, -1, -1));
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 110, 60, -1));
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 110, 60, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Cities.png"))); // NOI18N
         jButton1.setText("jButton1");
@@ -129,20 +114,24 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("CIUDAD");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 160, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 160, -1, -1));
 
         ciudadField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ciudadFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(ciudadField, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 180, 80, -1));
+        getContentPane().add(ciudadField, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 180, 80, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("RETO");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 220, -1, -1));
-        getContentPane().add(retoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 240, 80, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 220, -1, -1));
+        getContentPane().add(retoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 240, 80, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(3, 25, 36));
+        jScrollPane1.setForeground(new java.awt.Color(3, 25, 36));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 950, 550));
 
         LabelMainI.setForeground(new java.awt.Color(255, 255, 255));
         LabelMainI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/RqkZEPG.jpg"))); // NOI18N
@@ -219,7 +208,7 @@ public class CityPoly extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

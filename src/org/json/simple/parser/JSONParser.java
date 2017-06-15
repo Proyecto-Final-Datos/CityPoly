@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpEntity;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -274,21 +273,21 @@ public class JSONParser {
 	
 	private Map createObjectContainer(ContainerFactory containerFactory){
 		if(containerFactory == null)
-			return new JSONObject();
+			return  new JSONObject();
 		Map m = containerFactory.createObjectContainer();
 		
 		if(m == null)
-			return new JSONObject();
+			return  new JSONObject();
 		return m;
 	}
 	
 	private List createArrayContainer(ContainerFactory containerFactory){
 		if(containerFactory == null)
-			return new JSONArray();
+			return  new JSONArray();
 		List l = containerFactory.creatArrayContainer();
 		
 		if(l == null)
-			return new JSONArray();
+			return  new JSONArray();
 		return l;
 	}
 	
