@@ -24,7 +24,7 @@ public class GooglePlaces {
     
        private HttpEntity entity;
     
-    public void photoAnalize(String latitude,String longitude,String radius) throws URISyntaxException, ParseException, IOException
+    public void mapDetails(String latitude,String longitude,String radius) throws URISyntaxException, ParseException, IOException
     {
         HttpClient httpclient = new DefaultHttpClient();
 
