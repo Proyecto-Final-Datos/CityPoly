@@ -11,9 +11,16 @@ package controler;
  */
 public class ProcessManagment {
     
-    
+    /**
+     * Function to get the distance between two geographical locations
+     * @param pLat1 Latitude #1
+     * @param pLon1 Longitude #1
+     * @param pLat2 Latitude #2
+     * @param pLon2 Longitude #2
+     * @return The distance between the two points
+     */
     public double getDistance(float pLat1, float pLon1, float pLat2, float pLon2){
-        double result = 0;
+        double result = 0.0;
         
         //double radioTierra = 3958.75;//en millas  
         double radioTierra = 6371;//en kilómetros  
