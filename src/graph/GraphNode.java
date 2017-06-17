@@ -46,6 +46,12 @@ public class GraphNode {
         this.Thumbnail = Thumbnail;
     }
     
+    public GraphNode(String Place, double Latitude, double Longitude){
+        this.Place = Place;
+        this.Latitude = Latitude;
+        this.Longitude = Longitude;
+    }
+    
     //Getters and Setters
 
     public String getPlace() {

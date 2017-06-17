@@ -171,18 +171,19 @@ public class Dijkstra {
     
     /**
      * Function to get the shortest path between two nodes
-     * @param pNodeSource
-     * @param pNodeDestiny
-     * @return List of arcs with the shortest path
+     * The result will be inverse order so the list must be seen from 
+     * @param pNodeDestiny Destiny node to find path
+     * @return List of arcs with the shortest path 
      */
-    public ArrayList<Arc> getPath(GraphNode pNodeSource, GraphNode pNodeDestiny){
+    public ArrayList<Arc> getPath( GraphNode pNodeDestiny){
         ArrayList<Arc> result = new ArrayList<Arc>();
         
         int pos_destiny = findNode(pNodeDestiny); //Returns the position of the destiny node -> used to get the arc of the shortest path
-        GraphNode temp_node = Nodes.get(pos_destiny);
-        while (!temp_node.equals(pNodeSource)){ //until the source node equals the one we want to find
+        GraphNode temp_node = Nodes.get(pos_destiny); //the node that we will use to go back
+        while (!temp_node.equals(Source)){ //until the source node equals the one we want to find
             result.add(References.get(pos_destiny)); //adds the arc to the reference list -> result list
             temp_node = References.get(pos_destiny).getSource(); //returns the source of the arc -> so we can find our source node
+            pos_destiny = findNode(temp_node);
         }
         
         
@@ -205,8 +206,7 @@ public class Dijkstra {
             setWeights(default_node, default_weight); //updates the weight of the weight list
             int min_weight_pos = getMinDistanceArray(); //returns the pos of the min weight
             double min_weight = MinDistance.get(min_weight_pos); //returns the min weight
-            //GraphNode min_node = getMinDistanceNode(default_node, default_weight); //returns the destiny node of the min weight
-            GraphNode min_node = Nodes.get(min_weight_pos);  //Si no sirve Probar esta linea y no la anterior
+            GraphNode min_node = Nodes.get(min_weight_pos);  //Returns the node with the min weight
             int pos_node = findNode(min_node); //returns the pos of the destiny node
             
             MinDistanceStatus.set(min_weight_pos, true); //sets the weight as final REVISAR
@@ -219,7 +219,7 @@ public class Dijkstra {
     }
     
     /**
-     * Function to set the parcial weight of the nodes that aren't final and the Arc to get to it
+     * Function to set the partial weight of the nodes that aren't final and the Arc to get to it
      * @param pNode
      * @param pWeight 
      */
@@ -232,10 +232,12 @@ public class Dijkstra {
             int pos_node = findNode(destiny_node); //returns the pos of the destiny node
             if (!MinDistanceStatus.get(pos_node)){ //if the weight isn't final we change it
                 MinDistance.set(pos_node, conections.get(i).getWeight() + pWeight); // we change the min weight of the node
-                References.set(pos_node, conections.get(i)); //Sets the Arc to get to that node
+                References.set(pos_node, conections.get(i)); //Bueno
             }
         }
     }
+    
+    
     
     
     

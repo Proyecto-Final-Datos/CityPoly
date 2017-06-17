@@ -5,11 +5,17 @@
  */
 package controler;
 
+import java.util.*;
+import graph.*;
+
 /**
  *
  * @author albertoobando
  */
 public class ProcessManagment {
+    
+    private ArrayList<Arc> Arcs = new ArrayList<>();
+    private ArrayList<GraphNode> Nodes = new ArrayList<>();
     
     /**
      * Function to get the distance between two geographical locations
@@ -19,7 +25,7 @@ public class ProcessManagment {
      * @param pLon2 Longitude #2
      * @return The distance between the two points
      */
-    public double getDistance(float pLat1, float pLon1, float pLat2, float pLon2){
+    public double getDistance(double pLat1, double pLon1, double pLat2, double pLon2){
         double result = 0.0;
         
         //double radioTierra = 3958.75;//en millas  
@@ -31,9 +37,42 @@ public class ProcessManagment {
         double va1 = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)  
                 * Math.cos(Math.toRadians(pLat1)) * Math.cos(Math.toRadians(pLat2));  
         double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));  
-        result = radioTierra * va2;  
+        result = radioTierra * va2; 
+        result = result / 1000; //we divide by 1000 to get the result in meters.
    
         return result;
+    }
+    
+    /**
+     * Function to set all the arcs of the graph
+     * the arcs depend on the latitude and longitude of one another
+     * we take one node and compare the distance between it and all the other nodes
+     * if the distance is in the correct range (<=50 mts) we create the arc
+     */
+    public void setArcs(){
+        
+        //First for to get one node and compare it to all the others
+        for (int i = 0; i < Nodes.size(); i++){
+            GraphNode node_source = Nodes.get(i);
+            double lat1 = node_source.getLatitude();
+            double lon1 = node_source.getLongitude();
+            
+            //Second for to get another node and compare it to first node
+            for (int x = 0; i < Nodes.size(); x++){
+                GraphNode node_destiny = Nodes.get(x);
+                double lat2 = node_destiny.getLatitude();
+                double lon2 = node_destiny.getLongitude();
+                
+                //We begin the process to se if the arc can be created
+                double distance = getDistance(lat1, lon1, lat2, lon2);
+                if (distance <= 50.0){ //If it is in the roght range create the arc
+                    Arc temp_arc = new Arc(distance, node_source, node_destiny);
+                    node_source.getConections().add(temp_arc); //we add the arc reference to the node_source
+                    Arcs.add(temp_arc); //we add the arc to the arc list of the graph
+                }
+            }
+        }
+        
     }
     
 }
