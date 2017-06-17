@@ -57,14 +57,19 @@ public class GooglePlaces {
                 for( int i=0; i<locations.size();i++ )
                     {
                         JSONObject prueba = (JSONObject) locations.get(i);
-                        String name =  (String) prueba.get("name");
-                        String icon =  (String) prueba.get("icon");
-                        double rating =  (double) prueba.get("rating");
-                        JSONArray type = (JSONArray) prueba.get("types");
-                        String place =  (String) type.get(0);
-                        System.out.println("ShortName: "+name+", "+"ImageIcon: "+icon+", "+"Rating: "+String.valueOf(rating)+", "+"Type: "+place);
-         
+                        try{
+                           double rating =  (double) prueba.get("rating");
+                            String name =  (String) prueba.get("name");
+                            String icon =  (String) prueba.get("icon");
+                            JSONArray type = (JSONArray) prueba.get("types"); 
+                            String place =  (String) type.get(0);
+                            System.out.println("ShortName: "+name+", "+"ImageIcon: "+icon+", "+"Rating: "+String.valueOf(rating)+", "+"Type: "+place);
+                            
+                        }catch(Exception e){} 
+                        
                     }
+                System.out.println("");
+                System.out.println("");
             }
           
     }

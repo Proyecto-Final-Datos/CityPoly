@@ -11,7 +11,7 @@ package visualLogic;
  */
 public enum TypePlace {
     
-    BANK(0), BAR(1), BUSSTATION(2), COFFEESHOP(3), CHURCH(4), LIQUOR(5), MUSEUM(6), PARK(7),
+    BANK(0), BAR(1), BUSSTATION(2), COFFEESHOP(3), CHURCH(4), LIQUOR_STORE(5), MUSEUM(6), PARK(7),
     PARKING(8), RESTAURANT(9);
     
     private int value;

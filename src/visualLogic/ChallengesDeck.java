@@ -9,36 +9,48 @@ package visualLogic;
  *
  * @author Joseph Salas
  */
-public class ChallengesDeck {
+public class ChallengesDeck{
     
-    private int Times; //times to visit the place
-    private TypePlace Place; //type of place to visit
+    private Long Times; //times to visit the place
+    private String Place; //type of place to visit
+    private String Description;
     
     /**
      * Builder Method for the Challenge Class
      * @param Times It's value can be 1 or 2 (times to visit the place)
      * @param Place Place to visit
      */
-    public ChallengesDeck(int Times, TypePlace Place) {
-        this.Times = Times;
-        this.Place = Place;
+    public ChallengesDeck(String pPlace, Long pTimes, String pDescription ) {
+        this.Times = pTimes;
+        this.Place = pPlace;
+        this.Description = pDescription; 
     }
 
     //Getters and Setters
-    public int getTimes() {
+    public Long getTimes() {
         return Times;
     }
 
-    public void setTimes(int Times) {
+    public void setTimes(Long Times) {
         this.Times = Times;
     }
 
-    public TypePlace getPlace() {
+    public String getPlace() {
         return Place;
     }
 
-    public void setPlace(TypePlace Place) {
+    public void setPlace(String Place) {
         this.Place = Place;
     }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+    
+    
     
 }

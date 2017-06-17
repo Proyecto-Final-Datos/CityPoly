@@ -9,12 +9,12 @@ package visualLogic;
  *
  * @author Joseph Salas
  */
-public class CityDeck {
+public class CityDeck{
     
      private String Name; //Name to show in the Deck of cards
-    private float Longitude; //Parameters to pass to the api call
-    private float Latitude; //Parameters to pass to the api call
-    private float Radio; //Parameters to pass to the api call
+    private double Longitude; //Parameters to pass to the api call
+    private double Latitude; //Parameters to pass to the api call
+    private Long Radio; //Parameters to pass to the api call
 
     /**
      * Builder Method for the City Class
@@ -23,7 +23,7 @@ public class CityDeck {
      * @param Latitude Latitude of the City
      * @param Radio Radio to search the city
      */
-    public  CityDeck(String Name, float Longitude, float Latitude, float Radio) {
+    public  CityDeck(String Name, double Longitude, double Latitude, Long Radio) {
         this.Name = Name;
         this.Longitude = Longitude;
         this.Latitude = Latitude;
@@ -39,27 +39,27 @@ public class CityDeck {
         this.Name = Name;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return Longitude;
     }
 
-    public void setLongitude(float Longitude) {
+    public void setLongitude(double Longitude) {
         this.Longitude = Longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return Latitude;
     }
 
-    public void setLatitude(float Latitude) {
+    public void setLatitude(double Latitude) {
         this.Latitude = Latitude;
     }
 
-    public float getRadio() {
+    public Long getRadio() {
         return Radio;
     }
 
-    public void setRadio(float Radio) {
+    public void setRadio(Long Radio) {
         this.Radio = Radio;
     }
     

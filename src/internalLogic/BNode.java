@@ -1,26 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package internalLogic;
 
 /**
  *
  * @author Joseph Salas
  */
-public class BNode {
+public class BNode<T> {
+    
+    
     static int M;  //variable to determine order of tree
-
     int count; // number of keys in node
-
     String key[];  // array of key values
-
-    BNode child[]; //array of references
-
+    BNode<T> child[]; //array of references
     boolean leaf; //is node a leaf or not
-
-    BNode parent;  //parent of current node.
+    BNode<T> parent;  //parent of current node.
 
 // ----------------------------------------------------
 // this will be default constructor for new node      |
@@ -33,15 +26,15 @@ public class BNode {
 // will be called from BTree.java                     |
 // ----------------------------------------------------
 
-    public BNode(int pM, BNode parent)
+    public BNode(int pM, BNode<T> pParent)
     {
         this.M = pM;  //assign size
 
-        this.parent = parent; //assign parent
+        this.parent = pParent; //assign parent
 
-        key = new String[Math.round(pM * 2/3)];  // array of proper size REVISAR
+        key = new String[2*pM - 1];  // array of proper size REVISAR
 
-        child = new BNode[pM * 2]; // array of refs proper size REVISAR
+        child = new BNode[2*pM]; // array of refs proper size REVISAR
 
         leaf = true; // everynode is leaf at first;
 

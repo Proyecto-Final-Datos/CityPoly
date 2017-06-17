@@ -1,14 +1,26 @@
 
 package internalLogic;
 
+import visualLogic.PlayerNode;
+
 /**
  *
  * @author Joseph Salas
  */
 public class BTree {
+    // here are variables available to tree
+
     static int order; // order of tree
 
-    BNode root;  //every tree has at least a root node
+   private BNode root;  //every tree has at least a root node
+
+    public BNode getRoot() {
+        return root;
+    }
+
+    public void setRoot(BNode root) {
+        this.root = root;
+    }
 
 
 // ---------------------------------------------------------
@@ -24,16 +36,7 @@ public class BTree {
 
     }
 
-
-// --------------------------------------------------------
-// this will be method to search for a given node where   |
-// we want to insert a key value. this method is called   |
-// from SearchnPrintNode.  It returns a node with key     |
-// value in it                                            |
-// --------------------------------------------------------
-
-
-    public BNode search(BNode root, String key)
+    public boolean search(BNode root, String key)
     {
         int i = 0;//we always want to start searching the 0th index of node.
 
@@ -44,12 +47,12 @@ public class BTree {
 
         if(i <= root.count && key.equals(root.key[i]))//obviously if key is in node we went to return node.
         {
-            return root;
+            return true;
         }
 
         if(root.leaf)//since we've already checked root if it is leaf we don't have anything else to check
         {
-            return null ;
+            return false;
         }
         else//else if it is not leave recurse down through ith child
         {
@@ -61,7 +64,7 @@ public class BTree {
 //  want to insert into if it is full.                     |
 //  --------------------------------------------------------
 
-    public void split(BNode x, int i, BNode y)
+        public void split(BNode x, int i, BNode y)
     {
         BNode z = new BNode(order,null);//gotta have extra node if we are to split.
 
@@ -113,20 +116,20 @@ public class BTree {
 // this will be insert method when node is not full.        |
 // ----------------------------------------------------------
 
-    public void nonfullInsert(BNode x, String key)
+    public void nonfullInsert(BNode x, PlayerNode key)
     {
         int i = x.count; //i is number of keys in node x
 
         if(x.leaf)
         {
-            while(i >= 1 && key.compareTo(x.key[i-1]) < 0)//here find spot to put key.
+            while(i >= 1 && key.getNickName().compareTo(x.key[i-1]) < 0)//here find spot to put key.
             {
                 x.key[i] = x.key[i-1];//shift values to make room
 
                 i--;//decrement
             }
 
-            x.key[i] = key;//finally assign value to node REVISAR
+            x.key[i] = key.getNickName();//finally assign value to node REVISAR
             x.count ++; //increment count of keys in this node now.
 
         }
@@ -135,18 +138,15 @@ public class BTree {
         else
         {
             int j = 0;
-            while(j < x.count  && key.compareTo(x.key[j]) > 0)//find spot to recurse
-            {			             //on correct child  		
+            while(j < x.count  && key.getNickName().compareTo(x.key[j]) > 0)//find spot to recurse on correct child 
+            {			             		
                 j++;
             }
-
-    //	i++;
-
             if(x.child[j].count == order*2 - 1)
             {
                 split(x,j,x.child[j]);//call split on node x's ith child
 
-                if(key.compareTo(x.key[j]) > 0)
+                if(key.getNickName().compareTo(x.key[j]) > 0)
                 {
                     j++;
                 }
@@ -160,24 +160,19 @@ public class BTree {
 //insert non full if needed.                                    |
 //--------------------------------------------------------------
 
-    public void insert(BTree t, String key)
+    public void insert(BTree t, PlayerNode key)
     {
         BNode r = t.root;//this method finds the node to be inserted as 
                          //it goes through this starting at root node.
         if(r.count == 2*order - 1)//if is full
         {
             BNode s = new BNode(order,null);//new node
-
-            t.root = s;    //\
-                           // \	
-            s.leaf = false;//  \
-                           //   > this is to initialize node.
-            s.count = 0;   //  /
-                           // /	
-            s.child[0] = r;///
+            t.root = s;   
+            s.leaf = false;
+            s.count = 0;                      
+            s.child[0] = r;
 
             split(s,0,r);//split root
-
             nonfullInsert(s, key); //call insert method
         }
         else
@@ -213,7 +208,7 @@ public class BTree {
 // this will be method to print out a node                    |
 // ------------------------------------------------------------
 
-    public void SearchPrintNode(BTree pTree, String pKey)
+    /*public void SearchPrintNode(BTree pTree, PlayerNode pKey)
     {
         BNode temp= new BNode(order,null);
 
@@ -229,46 +224,5 @@ public class BTree {
         print(temp);
         }
 
-
-    }
-
-//--------------------------------------------------------------
-//this method will delete a key value from the leaf node it is |
-//in.  We will use the search method to traverse through the   |
-//tree to find the node where the key is in.  We will then     |
-//iterated through key[] array until we get to node and will   |
-//assign k[i] = k[i+1] overwriting key we want to delete and   |
-//keeping blank spots out as well.  Note that this is the most |
-//simple case of delete that there is and we will not have time|
-//to implement all cases properly.                             |
-//--------------------------------------------------------------
-
-   public void deleteKey(BTree pTree, String key)
-   {
-
-        BNode temp = new BNode(order,null);//temp Bnode
-
-        temp = search(pTree.root,key);//call of search method on tree for key
-
-        if(temp.leaf && temp.count > order - 1)
-        {
-            int i = 0;
-
-            while( key.compareTo(temp.getValue(i)) > 0)
-            {
-                i++;
-            }
-            for(int j = i; j < 2*order - 2; j++)
-            {
-                temp.key[j] = temp.getValue(j+1);
-            }
-            temp.count --;
-
-        }
-        else
-        {
-            System.out.println("This node is either not a leaf or has less than order - 1 keys.");
-        }
-   }
-    
+    }*/
 }

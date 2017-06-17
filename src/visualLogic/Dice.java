@@ -5,10 +5,23 @@
  */
 package visualLogic;
 
+import static java.lang.Math.random;
+import java.util.Random;
+
 /**
  *
  * @author Joseph Salas
  */
 public class Dice {
+    
+  
+    public int generateRandom()
+    {
+        Random randomNum = new Random();
+        int ran = randomNum.nextInt(7-1)+1;
+        return ran;
+    }
+    
+    
     
 }

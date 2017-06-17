@@ -9,22 +9,27 @@ import java.util.ArrayList;
  *
  * @author Joseph Salas
  */
-public class Deck {
+public class Deck<T> {
     
-     private ArrayList Cards = new ArrayList(40);
+     protected ArrayList<T> Cards = new ArrayList<T>(40);
 
     /**
      * Builder Method for the Deck Class
      */
     public Deck() {
     }
+    
+    public void add(T pData)
+    {
+        this.Cards.add(pData);
+    }
 
     //Getter and Setter
-    public ArrayList getCards() {
+    public ArrayList<T> getCards() {
         return Cards;
     }
 
-    public void setCards(ArrayList Cards) {
+    public void setCards(ArrayList<T> Cards) {
         this.Cards = Cards;
     }
     
