@@ -27,10 +27,12 @@ public class GooglePlaces {
     
        private HttpEntity entity;
     
-    public void mapDetails(String latitude,String longitude,String radius,String typePlace) throws URISyntaxException, ParseException, IOException
+    public ArrayList<GraphNode> mapDetails(String latitude,String longitude,String radius,String typePlace) throws URISyntaxException, ParseException, IOException
     {
         HttpClient httpclient = new DefaultHttpClient();
-
+        ArrayList<GraphNode> nodeList = new ArrayList();    
+        
+        
             URIBuilder builder = new URIBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius="+radius
                     + "&type="+typePlace+"&key=AIzaSyBxoUS7sbDYCMKhwfxO4oU_Qcr69SDtZBw");
             builder.setParameter("key","AIzaSyBxoUS7sbDYCMKhwfxO4oU_Qcr69SDtZBw");
@@ -58,20 +60,28 @@ public class GooglePlaces {
                     {
                         JSONObject prueba = (JSONObject) locations.get(i);
                         try{
+                             //Cambiar por ArrayList de Nodos
                            double rating =  (double) prueba.get("rating");
                             String name =  (String) prueba.get("name");
                             String icon =  (String) prueba.get("icon");
                             JSONArray type = (JSONArray) prueba.get("types"); 
                             String place =  (String) type.get(0);
-                            System.out.println("ShortName: "+name+", "+"ImageIcon: "+icon+", "+"Rating: "+String.valueOf(rating)+", "+"Type: "+place);
+                            double latitudePlace= (double) prueba.get("lat");
+                            double longitudePlace= (double) prueba.get("lng");
+                            GraphNode placeNode = new GraphNode(name,icon,place,rating,latitudePlace,longitudePlace);
+                            nodeList.add(placeNode);
+                            //System.out.println("ShortName: "+name+", "+"ImageIcon: "+icon+", "+"Rating: "+String.valueOf(rating)+", "+"Type: "+place);
                             
                         }catch(Exception e){} 
                         
                     }
                 System.out.println("");
                 System.out.println("");
+               
+                
             }
-          
+          return nodeList;
     }
+    
     
     }

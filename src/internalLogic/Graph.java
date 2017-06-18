@@ -3,26 +3,46 @@ package internalLogic;
 import java.util.*;
 
 public class Graph {
-    private Set<GraphNode> nodes = new HashSet<>();
- 
+    
+    private ArrayList<GraphNode> Nodes;// = new ArrayList<GraphNode>();
+    private ArrayList<ArcGraph> Arcs;// = new ArrayList<Arc>();
+
+    /**
+     * Builder method for Graph class
+     * @param Nodes
+     * @param Arcs 
+     */
+    public Graph(ArrayList<GraphNode> Nodes, ArrayList<ArcGraph> Arcs) {
+        this.Nodes = Nodes;
+        this.Arcs = Arcs;
+    }
+    
     // getters and setters
 
-    public Set<GraphNode> getNodes() {
-        return nodes;
+    public ArrayList<GraphNode> getNodes() {
+        return Nodes;
     }
 
-    public void setNodes(Set<GraphNode> nodes) {
-        this.nodes = nodes;
+    public void setNodes(ArrayList<GraphNode> pNodes) {
+        this.Nodes = pNodes;
+    }
+    
+    public ArrayList<ArcGraph> getArcs() {
+        return Arcs;
+    }
+    
+    public void setArcs(ArrayList<ArcGraph> pArcs) {
+        this.Arcs = pArcs;
     }
     
     //Other Functions
     
     /**
      * Function to add a new node to the graph
-     * @param nodeA Node to be inserted
+     * @param pNode Node to be inserted
      */
-    public void addNode(GraphNode nodeA) {
-        nodes.add(nodeA);
+    public void addNode(GraphNode pNode) {
+        Nodes.add(pNode);
     }
     
 }

@@ -165,6 +165,7 @@ public class LoginWindow extends javax.swing.JFrame {
           boolean playerNickName = usersTree.searchNickName(SignNickName.getText());
           if (playerNickName ==true)
           {
+              System.out.println("Se ha encotrado el jugador");
               
           }else
           {

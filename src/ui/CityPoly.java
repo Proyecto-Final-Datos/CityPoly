@@ -292,6 +292,7 @@ public class CityPoly extends javax.swing.JFrame {
         int ran = randomCity.nextInt(prueba.getCityDeck().getCards().size()-1)+1;
         ciudadField.setText(prueba.getCityDeck().getCards().get(ran).getName());
         
+        
     }//GEN-LAST:event_CitiesButtonActionPerformed
 
     private void challenge2P1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_challenge2P1ActionPerformed
