@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package graph;
+package internalLogic;
 
 import java.util.*;
 
@@ -13,13 +13,13 @@ import java.util.*;
  */
 public class DijkstraTest {
     
-    private static ArrayList<Arc> Arcs = new ArrayList<Arc>();
+    private static ArrayList<ArcGraph> Arcs = new ArrayList<ArcGraph>();
     private static ArrayList<GraphNode> Nodes = new ArrayList<GraphNode>();
     
     public static void addLane(int pSource, int pDestiny, double pWeight){
         GraphNode Source_node = Nodes.get(pSource);
         GraphNode Destiny_node = Nodes.get(pDestiny);
-        Arc temp_arc = new Arc(pWeight, Source_node, Destiny_node); //Creates the arc
+        ArcGraph temp_arc = new ArcGraph(pWeight, Source_node, Destiny_node); //Creates the arc
         Source_node.getConections().add(temp_arc); //adds the reference to the arc
         Arcs.add(temp_arc); //adds the arc to the arc list of the graph
     }
@@ -78,7 +78,7 @@ public class DijkstraTest {
         Graph test_graph = new Graph(Nodes, Arcs);
         Dijkstra test_dijkstra = new Dijkstra(test_graph, Nodes.get(0));
         test_dijkstra.execute(); //Calculates the shortest path
-        ArrayList<Arc> test_path = test_dijkstra.getPath( Nodes.get(7));
+        ArrayList<ArcGraph> test_path = test_dijkstra.getPath( Nodes.get(7));
         //for (int x = test_dijkstra.getReferences().size() - 1; x > 0; x--){
         for (int x = test_path.size() - 1; x >= 0; x--){
             //System.out.println(test_dijkstra.getReferences().get(x).toString());

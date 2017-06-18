@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package graph;
+package internalLogic;
 
 import java.util.*;
 
@@ -14,14 +14,14 @@ import java.util.*;
 public class Graph {
     
     private ArrayList<GraphNode> Nodes;// = new ArrayList<GraphNode>();
-    private ArrayList<Arc> Arcs;// = new ArrayList<Arc>();
+    private ArrayList<ArcGraph> Arcs;// = new ArrayList<Arc>();
 
     /**
      * Builder method for Graph class
      * @param Nodes
      * @param Arcs 
      */
-    public Graph(ArrayList<GraphNode> Nodes, ArrayList<Arc> Arcs) {
+    public Graph(ArrayList<GraphNode> Nodes, ArrayList<ArcGraph> Arcs) {
         this.Nodes = Nodes;
         this.Arcs = Arcs;
     }
@@ -36,11 +36,11 @@ public class Graph {
         this.Nodes = pNodes;
     }
     
-    public ArrayList<Arc> getArcs() {
+    public ArrayList<ArcGraph> getArcs() {
         return Arcs;
     }
     
-    public void setArcs(ArrayList<Arc> pArcs) {
+    public void setArcs(ArrayList<ArcGraph> pArcs) {
         this.Arcs = pArcs;
     }
     

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package decks;
+package visualLogic;
+
+
 
 /**
  *
  * @author Alberto Obando
  */
-public class City {
+public class CityDeck {
     
     private String Name; //Name to show in the Deck of cards
     private double Longitude; //Parameters to pass to the api call
@@ -23,7 +25,7 @@ public class City {
      * @param Latitude Latitude of the City
      * @param Radio Radio to search the city
      */
-    public City(String Name, float Longitude, float Latitude, float Radio) {
+    public CityDeck(String Name, float Longitude, float Latitude, float Radio) {
         this.Name = Name;
         this.Longitude = Longitude;
         this.Latitude = Latitude;

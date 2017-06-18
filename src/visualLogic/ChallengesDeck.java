@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package decks;
+package visualLogic;
+
+import internalLogic.*;
+
 
 /**
  *
  * @author Alberto Obando
  */
-public class Challenge {
+public class ChallengesDeck {
     
     private int Times; //times to visit the place
-    private TypePlace Place; //type of place to visit
+    private String Place; //type of place to visit
 
     /**
      * Builder Method for the Challenge Class
      * @param Times It's value can be 1 or 2 (times to visit the place)
      * @param Place Place to visit
      */
-    public Challenge(int Times, TypePlace Place) {
+    public ChallengesDeck(int Times, String Place) {
         this.Times = Times;
         this.Place = Place;
     }
@@ -33,11 +36,11 @@ public class Challenge {
         this.Times = Times;
     }
 
-    public TypePlace getPlace() {
+    public String getPlace() {
         return Place;
     }
 
-    public void setPlace(TypePlace Place) {
+    public void setPlace(String Place) {
         this.Place = Place;
     }
     

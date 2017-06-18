@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package graph;
+package internalLogic;
 
-import decks.*;
 import java.util.*;
 
 /**
@@ -16,12 +15,12 @@ public class GraphNode {
     
     private String Place; //Name of the Place to visit
     private String Thumbnail; //Tiene que ser el thumbnail del lugar -> URL
-    private TypePlace Type; //Type of place to visit -> to know if its valid for 
+    private String Type; //Type of place to visit -> to know if its valid for 
     private double Rating; //Used to sum up stars in the game
     private double Latitude; //Latitude of the place -> to calculate adyacent Nodes
     private double Longitude; //Longitude of the place -> to calculate adyacent Nodes
     
-    private ArrayList<Arc> Conections = new ArrayList<Arc>(); //List of Connections to other Nodes
+    private ArrayList<ArcGraph> Conections = new ArrayList<ArcGraph>(); //List of Connections to other Nodes
 
     /**
      * Builder Method for the GraphNode Class
@@ -32,7 +31,7 @@ public class GraphNode {
      * @param Latitude
      * @param Longitude 
      */
-    public GraphNode(String Place, String Thumbnail, TypePlace Type, double Rating, double Latitude, double Longitude) {
+    public GraphNode(String Place, String Thumbnail, String Type, double Rating, double Latitude, double Longitude) {
         this.Place = Place;
         this.Thumbnail = Thumbnail;
         this.Type = Type;
@@ -70,11 +69,11 @@ public class GraphNode {
         this.Thumbnail = Thumbnail;
     }
 
-    public TypePlace getType() {
+    public String getType() {
         return Type;
     }
 
-    public void setType(TypePlace Type) {
+    public void setType(String Type) {
         this.Type = Type;
     }
 
@@ -102,11 +101,11 @@ public class GraphNode {
         this.Longitude = Longitude;
     }
 
-    public ArrayList<Arc> getConections() {
+    public ArrayList<ArcGraph> getConections() {
         return Conections;
     }
 
-    public void setConections(ArrayList<Arc> Conections) {
+    public void setConections(ArrayList<ArcGraph> Conections) {
         this.Conections = Conections;
     }
     

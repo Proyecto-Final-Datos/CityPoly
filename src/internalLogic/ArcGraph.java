@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package graph;
+package internalLogic;
 
 /**
  *
  * @author Alberto Obando
  */
-public class Arc {
+public class ArcGraph {
     
     private double weight; //Distance less than 50 meters between two Nodes
     private GraphNode Source; //Departs from here
@@ -21,7 +21,7 @@ public class Arc {
      * @param Source Source Node
      * @param Destiny Destiny Node
      */
-    public Arc(double weight, GraphNode Source,GraphNode Destiny) {
+    public ArcGraph(double weight, GraphNode Source,GraphNode Destiny) {
         this.weight = weight;
         this.Source = Source;
         this.Destiny = Destiny;

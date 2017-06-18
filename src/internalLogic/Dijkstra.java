@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package graph;
+package internalLogic;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Dijkstra {
     
-    private ArrayList<Arc> References; //List to know from which node the min distance comes from
+    private ArrayList<ArcGraph> References; //List to know from which node the min distance comes from
     private ArrayList<GraphNode> Nodes; //The list of nodes in the graph
     private ArrayList<Boolean> MinDistanceStatus; //This list is used to know if we have the lowest weight for a given Node
     private ArrayList<Double> MinDistance; //This is the list that will contain the minimum distance to get to that node
@@ -34,11 +34,11 @@ public class Dijkstra {
     
     //Getters y Setters
 
-    public ArrayList<Arc> getReferences() {
+    public ArrayList<ArcGraph> getReferences() {
         return References;
     }
 
-    public void setReferences(ArrayList<Arc> References) {
+    public void setReferences(ArrayList<ArcGraph> References) {
         this.References = References;
     }
     
@@ -51,7 +51,7 @@ public class Dijkstra {
      */
     public double getMinDistance(GraphNode pNode, double pWeight){
         double result = Double.MAX_VALUE;
-        ArrayList<Arc> conections = pNode.getConections();
+        ArrayList<ArcGraph> conections = pNode.getConections();
         
         for (int i = 0; i < conections.size(); i++){
             if (conections.get(i).getWeight() + pWeight < result ){
@@ -71,7 +71,7 @@ public class Dijkstra {
         GraphNode result = null;
         double max_double = Double.MAX_VALUE;
         
-        ArrayList<Arc> conections = pNode.getConections();
+        ArrayList<ArcGraph> conections = pNode.getConections();
         
         for (int i = 0; i < conections.size(); i++){
             if (conections.get(i).getWeight() + pWeight < max_double ){
@@ -108,11 +108,11 @@ public class Dijkstra {
      * @param pWeight
      * @return arc of the min distance
      */
-    public Arc getMinDistanceArc(GraphNode pNode, double pWeight){
-        Arc result = null;
+    public ArcGraph getMinDistanceArc(GraphNode pNode, double pWeight){
+        ArcGraph result = null;
         double max_double = Double.MAX_VALUE;
         
-        ArrayList<Arc> conections = pNode.getConections();
+        ArrayList<ArcGraph> conections = pNode.getConections();
         
         for (int i = 0; i < conections.size(); i++){
             if (conections.get(i).getWeight() + pWeight < max_double ){
@@ -174,8 +174,8 @@ public class Dijkstra {
      * @param pNodeDestiny Destiny node to find path
      * @return List of arcs with the shortest path 
      */
-    public ArrayList<Arc> getPath( GraphNode pNodeDestiny){
-        ArrayList<Arc> result = new ArrayList<Arc>();
+    public ArrayList<ArcGraph> getPath( GraphNode pNodeDestiny){
+        ArrayList<ArcGraph> result = new ArrayList<ArcGraph>();
         
         int pos_destiny = findNode(pNodeDestiny); //Returns the position of the destiny node -> used to get the arc of the shortest path
         GraphNode temp_node = Nodes.get(pos_destiny); //the node that we will use to go back
@@ -195,7 +195,7 @@ public class Dijkstra {
      * @param pWeight Recursive weight 
      */
     public void setWeights(GraphNode pNode, double pWeight){
-        ArrayList<Arc> conections = pNode.getConections();
+        ArrayList<ArcGraph> conections = pNode.getConections();
         
         for (int i = 0; i < conections.size(); i++){
             GraphNode destiny_node = conections.get(i).getDestiny();
@@ -216,7 +216,7 @@ public class Dijkstra {
         GraphNode default_node = Source; //we begin with source
         MinDistance.set(findNode(Source), 0.0); //sets the weight of the source node to 0
         MinDistanceStatus.set(findNode(Source), true); //sets the weight as final
-        References.set(findNode(Source), new Arc(0.0, Source, Source)); //sets the source of the as himself so no null pointer exception occurs
+        References.set(findNode(Source), new ArcGraph(0.0, Source, Source)); //sets the source of the as himself so no null pointer exception occurs
         
         for (int i = 0; i < Nodes.size(); i++){ //We execute the cicle the number of nodes we have
             

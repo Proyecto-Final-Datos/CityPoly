@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controler;
+package controller;
 
+import internalLogic.ArcGraph;
+import internalLogic.GraphNode;
 import java.util.*;
-import graph.*;
 
 /**
  *
@@ -14,7 +15,7 @@ import graph.*;
  */
 public class ProcessManagment {
     
-    private ArrayList<Arc> Arcs = new ArrayList<>();
+    private ArrayList<ArcGraph> Arcs = new ArrayList<>();
     private ArrayList<GraphNode> Nodes = new ArrayList<>();
     
     /**
@@ -66,7 +67,7 @@ public class ProcessManagment {
                 //We begin the process to se if the arc can be created
                 double distance = getDistance(lat1, lon1, lat2, lon2);
                 if (distance <= 50.0){ //If it is in the roght range create the arc
-                    Arc temp_arc = new Arc(distance, node_source, node_destiny);
+                    ArcGraph temp_arc = new ArcGraph(distance, node_source, node_destiny);
                     node_source.getConections().add(temp_arc); //we add the arc reference to the node_source
                     Arcs.add(temp_arc); //we add the arc to the arc list of the graph
                 }
