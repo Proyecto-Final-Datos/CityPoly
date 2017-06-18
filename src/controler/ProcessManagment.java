@@ -74,5 +74,30 @@ public class ProcessManagment {
         }
     }
     
+    /**
+     * Function to delete all nodes that only have a connection to themselves
+     */
+    public void deleteNodes(){
+        
+        ArrayList<Integer> pos_list = new ArrayList<>();
+        
+        //For to go trough all the nodes
+        for (int i = 0; i < Nodes.size(); i++){
+            if (Nodes.get(i).getConections().size() == 1){
+                pos_list.add(i); //adds the position to be deleted
+            }
+        }
+        
+        int pos_corrector = 0;
+        //For to delete all the nodes
+        for (int x = 0; x < pos_list.size(); x++){
+            Nodes.remove(pos_list.get(x) - pos_corrector);
+            pos_corrector++; //we adjust the pos_corrector
+        }
+        
+    }
+    
+    
+    
     
 }
