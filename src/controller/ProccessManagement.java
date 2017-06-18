@@ -80,7 +80,7 @@ public class ProccessManagement {
                 * Math.cos(Math.toRadians(pLat1)) * Math.cos(Math.toRadians(pLat2));  
         double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));  
         result = earthRadious * va2; 
-        result = result * 1000; //we divide by 1000 to get the result in meters.
+        result = result * 100; //we divide by 1000 to get the result in meters.
    
         return result;
     }

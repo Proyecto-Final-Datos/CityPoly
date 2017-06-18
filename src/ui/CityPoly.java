@@ -90,6 +90,7 @@ public class CityPoly extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         PruebaButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         LabelMainI = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -258,13 +259,16 @@ public class CityPoly extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 950, 580));
 
-        PruebaButton.setText("Prueba");
+        PruebaButton.setText("Turno P1");
         PruebaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PruebaButtonActionPerformed(evt);
             }
         });
         getContentPane().add(PruebaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
+
+        jButton1.setText("Turno P2");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 670, -1, -1));
 
         LabelMainI.setForeground(new java.awt.Color(255, 255, 255));
         LabelMainI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/RqkZEPG.jpg"))); // NOI18N
@@ -436,6 +440,7 @@ public class CityPoly extends javax.swing.JFrame {
     private javax.swing.JTextField ciudadField;
     private javax.swing.JButton diceButton;
     private javax.swing.JLabel estrellasLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDesafios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
