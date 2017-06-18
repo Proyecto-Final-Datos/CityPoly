@@ -3,12 +3,14 @@ package ui;
 
 import controller.LoginManager;
 import internalLogic.BTree;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import visualLogic.Player;
 
 public class LoginWindow extends javax.swing.JFrame {
 
    private LoginManager usersTree;
-   
+   public static ArrayList<Player> playerList = new ArrayList<Player>();
    
     public LoginWindow() {
         initComponents();
@@ -165,7 +167,18 @@ public class LoginWindow extends javax.swing.JFrame {
           boolean playerNickName = usersTree.searchNickName(SignNickName.getText());
           if (playerNickName ==true)
           {
-              System.out.println("Se ha encotrado el jugador");
+              Player playerGame = new Player(SignNickName.getText(), signPassword.getText(),0);
+              if(playerGame.getPassword().equals(signPassword.getText()))
+              {
+                playerList.add(playerGame);  
+                JOptionPane.showMessageDialog(null, "Jugador listo", "Completo", JOptionPane.INFORMATION_MESSAGE);
+                
+  
+              }else
+              {
+                JOptionPane.showMessageDialog(null, "Constraseña y jugador no coinciden", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
+              }
+              
               
           }else
           {

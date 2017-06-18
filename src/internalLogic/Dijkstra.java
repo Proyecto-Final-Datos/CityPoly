@@ -71,7 +71,10 @@ public class Dijkstra<T extends Comparable<T>> {
                 result = conections.get(i).getDestiny(); //returns the destiny Node
             }
         }
+        System.out.println(String.valueOf(result.getLatitude())+" "+String.valueOf(result.getLongitude())+" "+String.valueOf(result.getRating())+" "
+                +result.getThumbnail()+" "+result.getType());
         return result;
+        
     }
     
     /**
@@ -226,5 +229,47 @@ public class Dijkstra<T extends Comparable<T>> {
                 References.set(pos_node, conections.get(i)); //Bueno
             }
         }
-    }    
+    }   
+
+    public ArrayList<GraphNode> getNodes() {
+        return Nodes;
+    }
+
+    public void setNodes(ArrayList<GraphNode> Nodes) {
+        this.Nodes = Nodes;
+    }
+
+    public ArrayList<Boolean> getMinDistanceStatus() {
+        return MinDistanceStatus;
+    }
+
+    public void setMinDistanceStatus(ArrayList<Boolean> MinDistanceStatus) {
+        this.MinDistanceStatus = MinDistanceStatus;
+    }
+
+    public ArrayList<Double> getMinDistance() {
+        return MinDistance;
+    }
+
+    public void setMinDistance(ArrayList<Double> MinDistance) {
+        this.MinDistance = MinDistance;
+    }
+
+    public int getAmountNodes() {
+        return AmountNodes;
+    }
+
+    public void setAmountNodes(int AmountNodes) {
+        this.AmountNodes = AmountNodes;
+    }
+
+    public GraphNode getSource() {
+        return Source;
+    }
+
+    public void setSource(GraphNode Source) {
+        this.Source = Source;
+    }
+    
+    
 }

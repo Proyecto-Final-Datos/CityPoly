@@ -25,7 +25,7 @@ public class NewClass {
         for (int i=0;i<places.size();i++)
         {
             GooglePlaces prueba = new GooglePlaces();
-            prueba.mapDetails("41.89543", "12.498910","1500",places.get(i));
+            prueba.mapDetails("12.498910","41.89543","1500",places.get(i));
         }
         
     }

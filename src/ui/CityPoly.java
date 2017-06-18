@@ -10,17 +10,43 @@ import java.io.File;
 import java.util.Random;
 import visualLogic.Dice;
 import javax.swing.JFileChooser;
+import controller.ProccessManagement;
+import internalLogic.Graph;
+import java.awt.Graphics;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.parser.ParseException;
+import visualLogic.CityDeck;
+import visualLogic.Player;
+import static ui.LoginWindow.playerList;
+import visualLogic.ChallengesDeck;
 
 /**
  *
  * @author Joseph Salas
+ * 
  */
 public class CityPoly extends javax.swing.JFrame {
+   
+    private Player Player1;
+    private Player Player2;
     
-    JsonManager prueba = new JsonManager();
     
+    ArrayList<ChallengesDeck> challengesPlayer1 = new ArrayList<ChallengesDeck>();
+     ArrayList<ChallengesDeck> challengesPlayer2 = new ArrayList<ChallengesDeck>();
+    JsonManager JsonManager = new JsonManager();
+    ProccessManagement ProccessManagement = new ProccessManagement();
     public CityPoly() {
         initComponents();
+        Player1 = playerList.get(0);
+        Player2 = playerList.get(1);
+        Player1Field.setText(Player1.getNickName());
+        Player2Field.setText(Player2.getNickName());
+        starPlayer1.setText(String.valueOf(Player1.getStars()));
+        starPlayer2.setText(String.valueOf(Player2.getStars()));   
     }
 
     /**
@@ -32,23 +58,22 @@ public class CityPoly extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        Player2Field = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        Player1Field = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButtonDesafios = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         starPlayer1 = new javax.swing.JTextField();
         estrellasLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        starsPlayer2 = new javax.swing.JTextField();
+        starPlayer2 = new javax.swing.JTextField();
         CitiesButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         ciudadField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         challenge1P2 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
         diceButton = new javax.swing.JButton();
         randomField = new javax.swing.JTextField();
         loadCards = new javax.swing.JButton();
@@ -62,6 +87,9 @@ public class CityPoly extends javax.swing.JFrame {
         challenge2P2 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         challenge3P2 = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        PruebaButton = new javax.swing.JButton();
         LabelMainI = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +97,7 @@ public class CityPoly extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1250, 740));
         setPreferredSize(new java.awt.Dimension(1250, 740));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, 100, 30));
+        getContentPane().add(Player2Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, 100, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -81,12 +109,12 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel2.setText("Jugador 1");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        Player1Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                Player1FieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, 30));
+        getContentPane().add(Player1Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/coollogo_com-36272774.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
@@ -117,12 +145,12 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel5.setText("Estrellas");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 90, -1, -1));
 
-        starsPlayer2.addActionListener(new java.awt.event.ActionListener() {
+        starPlayer2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                starsPlayer2ActionPerformed(evt);
+                starPlayer2ActionPerformed(evt);
             }
         });
-        getContentPane().add(starsPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 110, 60, -1));
+        getContentPane().add(starPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 110, 60, -1));
 
         CitiesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Cities.png"))); // NOI18N
         CitiesButton.setText("jButton1");
@@ -151,10 +179,6 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel7.setText("Reto1");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 150, -1, -1));
         getContentPane().add(challenge1P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 170, 100, -1));
-
-        jScrollPane1.setBackground(new java.awt.Color(3, 25, 36));
-        jScrollPane1.setForeground(new java.awt.Color(3, 25, 36));
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 950, 550));
 
         diceButton.setBackground(new java.awt.Color(153, 0, 255));
         diceButton.setForeground(new java.awt.Color(0, 0, 204));
@@ -226,6 +250,22 @@ public class CityPoly extends javax.swing.JFrame {
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 280, -1, -1));
         getContentPane().add(challenge3P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 300, 100, -1));
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 580));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 950, 580));
+
+        PruebaButton.setText("Prueba");
+        PruebaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PruebaButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(PruebaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
+
         LabelMainI.setForeground(new java.awt.Color(255, 255, 255));
         LabelMainI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/RqkZEPG.jpg"))); // NOI18N
         LabelMainI.setText("jLabel1");
@@ -237,32 +277,48 @@ public class CityPoly extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void Player1FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Player1FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_Player1FieldActionPerformed
 
     private void jButtonDesafiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesafiosActionPerformed
 
        Random randomChallenge = new Random(); 
-       int ran = randomChallenge.nextInt(prueba.getChallengesDeck().getCards().size()-1)+1;
-       challenge1P1.setText(prueba.getChallengesDeck().getCards().get(ran).getDescription());
-       int ran1 = randomChallenge.nextInt(prueba.getChallengesDeck().getCards().size()-1)+1;
-       challenge2P1.setText(prueba.getChallengesDeck().getCards().get(ran1).getDescription());
-       int ran2 = randomChallenge.nextInt(prueba.getChallengesDeck().getCards().size()-1)+1;
-       challenge3P1.setText(prueba.getChallengesDeck().getCards().get(ran2).getDescription());
-       int ran3 = randomChallenge.nextInt(prueba.getChallengesDeck().getCards().size()-1)+1;
-       challenge1P2.setText(prueba.getChallengesDeck().getCards().get(ran3).getDescription());
-       int ran4 = randomChallenge.nextInt(prueba.getChallengesDeck().getCards().size()-1)+1;
-       challenge2P2.setText(prueba.getChallengesDeck().getCards().get(ran4).getDescription());
-       int ran5 = randomChallenge.nextInt(prueba.getChallengesDeck().getCards().size()-1)+1;
-       challenge3P2.setText(prueba.getChallengesDeck().getCards().get(ran5).getDescription());
-        
-        
+       int ran = randomChallenge.nextInt(JsonManager.getChallengesDeck().getCards().size()-1)+1;
+       challenge1P1.setText(JsonManager.getChallengesDeck().getCards().get(ran).getDescription());
+       int ran1 = randomChallenge.nextInt(JsonManager.getChallengesDeck().getCards().size()-1)+1;
+       challenge2P1.setText(JsonManager.getChallengesDeck().getCards().get(ran1).getDescription());
+       int ran2 = randomChallenge.nextInt(JsonManager.getChallengesDeck().getCards().size()-1)+1;
+       challenge3P1.setText(JsonManager.getChallengesDeck().getCards().get(ran2).getDescription());
+       challengesPlayer1.add(JsonManager.getChallengesDeck().getCards().get(ran));
+       challengesPlayer1.add(JsonManager.getChallengesDeck().getCards().get(ran1));
+       challengesPlayer1.add(JsonManager.getChallengesDeck().getCards().get(ran2));
+       int ran3 = randomChallenge.nextInt(JsonManager.getChallengesDeck().getCards().size()-1)+1;
+       challenge1P2.setText(JsonManager.getChallengesDeck().getCards().get(ran3).getDescription());
+       int ran4 = randomChallenge.nextInt(JsonManager.getChallengesDeck().getCards().size()-1)+1;
+       challenge2P2.setText(JsonManager.getChallengesDeck().getCards().get(ran4).getDescription());
+       int ran5 = randomChallenge.nextInt(JsonManager.getChallengesDeck().getCards().size()-1)+1;
+       challenge3P2.setText(JsonManager.getChallengesDeck().getCards().get(ran5).getDescription());
+       challengesPlayer2.add(JsonManager.getChallengesDeck().getCards().get(ran3));
+       challengesPlayer2.add(JsonManager.getChallengesDeck().getCards().get(ran4));
+       challengesPlayer2.add(JsonManager.getChallengesDeck().getCards().get(ran5));
+       Player1.setChallenges(challengesPlayer1);
+       Player2.setChallenges(challengesPlayer2);
+       Player1.setStartNode(ProccessManagement.generateRandomNode());
+       Player2.setStartNode(ProccessManagement.generateRandomNode());
+       System.out.println(Player2.getNickName()); 
+       System.out.println(Player1.getNickName());
+       for (int b =0; b<Player1.getChallenges().size();b++)
+       {
+           System.out.println(Player1.getChallenges().get(b));
+           System.out.println(Player2.getChallenges().get(b));
+         
+       }       
     }//GEN-LAST:event_jButtonDesafiosActionPerformed
 
-    private void starsPlayer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_starsPlayer2ActionPerformed
+    private void starPlayer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_starPlayer2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_starsPlayer2ActionPerformed
+    }//GEN-LAST:event_starPlayer2ActionPerformed
 
     private void ciudadFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadFieldActionPerformed
         
@@ -282,15 +338,32 @@ public class CityPoly extends javax.swing.JFrame {
              String path = file.getAbsolutePath();
              try
              {   
-               prueba.JsonRead(path);
+               JsonManager.JsonRead(path);
              }catch(Exception e){}
          }
     }//GEN-LAST:event_loadCardsActionPerformed
 
     private void CitiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CitiesButtonActionPerformed
-        Random randomCity = new Random();
-        int ran = randomCity.nextInt(prueba.getCityDeck().getCards().size()-1)+1;
-        ciudadField.setText(prueba.getCityDeck().getCards().get(ran).getName());
+        try {
+            Random randomCity = new Random();
+            int ran = randomCity.nextInt(JsonManager.getCityDeck().getCards().size()-1)+1;
+            CityDeck aux = JsonManager.getCityDeck().getCards().get(ran);
+            ciudadField.setText(aux.getName());
+            
+            Graph graphGame;
+            graphGame= ProccessManagement.requestJson(String.valueOf(aux.getLatitude()),String.valueOf(aux.getLongitude()),String.valueOf(aux.getRadio()));
+            
+            for (int i =0; i<graphGame.getNodes().size();i++)
+            {
+                System.out.println("Lugar: "+graphGame.getNodes().get(i).getPlace()+"Tumbnail:"+ graphGame.getNodes().get(i).getThumbnail());
+            }
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(CityPoly.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CityPoly.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CityPoly.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_CitiesButtonActionPerformed
@@ -306,6 +379,12 @@ public class CityPoly extends javax.swing.JFrame {
     private void challenge2P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_challenge2P2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_challenge2P2ActionPerformed
+
+    private void PruebaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PruebaButtonActionPerformed
+      
+        ProccessManagement.getRoute(Player1);
+        System.out.println(Player1.getChallengePath().toString());
+    }//GEN-LAST:event_PruebaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,6 +424,9 @@ public class CityPoly extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CitiesButton;
     private javax.swing.JLabel LabelMainI;
+    private javax.swing.JTextField Player1Field;
+    private javax.swing.JTextField Player2Field;
+    private javax.swing.JButton PruebaButton;
     private javax.swing.JTextField challenge1P1;
     private javax.swing.JTextField challenge1P2;
     private javax.swing.JTextField challenge2P1;
@@ -367,12 +449,11 @@ public class CityPoly extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton loadCards;
     private javax.swing.JTextField randomField;
     private javax.swing.JTextField starPlayer1;
-    private javax.swing.JTextField starsPlayer2;
+    private javax.swing.JTextField starPlayer2;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,7 +33,7 @@ public class GooglePlaces {
         ArrayList<GraphNode> nodeList = new ArrayList();    
         
         
-            URIBuilder builder = new URIBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+latitude+","+longitude+"&radius="+radius
+            URIBuilder builder = new URIBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+longitude+","+latitude+"&radius="+radius
                     + "&type="+typePlace+"&key=AIzaSyBxoUS7sbDYCMKhwfxO4oU_Qcr69SDtZBw");
             builder.setParameter("key","AIzaSyBxoUS7sbDYCMKhwfxO4oU_Qcr69SDtZBw");
             builder.setParameter("language", "en");
@@ -66,8 +66,10 @@ public class GooglePlaces {
                             String icon =  (String) prueba.get("icon");
                             JSONArray type = (JSONArray) prueba.get("types"); 
                             String place =  (String) type.get(0);
-                            double latitudePlace= (double) prueba.get("lat");
-                            double longitudePlace= (double) prueba.get("lng");
+                            JSONObject geometry= (JSONObject) prueba.get("geometry");
+                            JSONObject locationLatLng= (JSONObject) geometry.get("location");
+                            double latitudePlace = (double) locationLatLng.get("lat");
+                            double longitudePlace = (double) locationLatLng.get("lng");
                             GraphNode placeNode = new GraphNode(name,icon,place,rating,latitudePlace,longitudePlace);
                             nodeList.add(placeNode);
                             //System.out.println("ShortName: "+name+", "+"ImageIcon: "+icon+", "+"Rating: "+String.valueOf(rating)+", "+"Type: "+place);
@@ -75,10 +77,6 @@ public class GooglePlaces {
                         }catch(Exception e){} 
                         
                     }
-                System.out.println("");
-                System.out.println("");
-               
-                
             }
           return nodeList;
     }

@@ -1,6 +1,7 @@
 
 package controller;
 
+import internalLogic.BNode;
 import internalLogic.BTree;
 import visualLogic.PlayerNode;
 
@@ -24,6 +25,12 @@ public class LoginManager {
         boolean stateNickName = treeUsers.search(treeUsers.getRoot(), NickName);
         
         return stateNickName;
+    }
+    
+    public BNode searchNode(String NickName)
+    {
+        BNode userNode = treeUsers.searchToInsert(treeUsers.getRoot(), NickName);
+        return userNode;
     }
     
 }

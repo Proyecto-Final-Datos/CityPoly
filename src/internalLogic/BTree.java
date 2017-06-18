@@ -225,4 +225,29 @@ public class BTree {
         }
 
     }*/
+    
+    
+     public BNode searchToInsert(BNode root, String key)
+    {
+        int i = 0;//we always want to start searching the 0th index of node.
+
+        while(i < root.count && key.compareTo(root.key[i]) > 0)//keep incrementing in node while key > current value.
+        {
+            i++;
+        }
+
+        if(i <= root.count && key.equals(root.key[i]))//obviously if key is in node we went to return node.
+        {
+            return root;
+        }
+
+        if(root.leaf)//since we've already checked root if it is leaf we don't have anything else to check
+        {
+            return null;
+        }
+        else//else if it is not leave recurse down through ith child
+        {
+            return searchToInsert(root.getChild(i),key);
+        }
+    }
 }
