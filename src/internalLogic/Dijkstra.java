@@ -201,9 +201,7 @@ public class Dijkstra<T extends Comparable<T>> {
             int min_weight_pos = getMinDistanceArray(); //returns the pos of the min weight
             double min_weight = MinDistance.get(min_weight_pos); //returns the min weight
             GraphNode min_node = Nodes.get(min_weight_pos);  //Returns the node with the min weight
-            int pos_node = findNode(min_node); //returns the pos of the destiny node
-            
-            
+            int pos_node = findNode(min_node); //returns the pos of the destiny node   
             MinDistanceStatus.set(min_weight_pos, true); //sets the weight as final REVISAR
             
             default_weight = min_weight; //Change of values to continue the cicle

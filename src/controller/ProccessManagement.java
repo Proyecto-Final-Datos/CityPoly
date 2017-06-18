@@ -148,7 +148,7 @@ public class ProccessManagement {
             String temp_type = pPlayer.getChallenges().get(i).getPlace(); //type of place we have to visit
 
             //Second for to get to the type places temp_times
-            for (int x = 0; i < temp_times; x++){
+            for (int x = 0; x < temp_times; x++){
                 
                 //We execute a cicle to calculate the route for one challenge
                 Dijkstra temp_route = new Dijkstra(graphGame, pPlayer.getStartNode());
@@ -156,9 +156,15 @@ public class ProccessManagement {
                 ArrayList<GraphNode> posible_nodes = getTypeList(temp_type); //gets the array of posible nodes to visit
                 GraphNode temp_destiny = getMinDistanceNode(temp_route, posible_nodes); //sets the node we have to get to
                 ArrayList<ArcGraph> temp_path = temp_route.getPath(temp_destiny); //Find the path to that node
+                for(int b = 0; b< posible_nodes.size();b++)
+                {
+                    System.out.println(posible_nodes.get(b).getType()+" "+posible_nodes.get(b).getThumbnail()+""
+                            +posible_nodes.get(b).getPlace()+" "+String.valueOf(posible_nodes.get(b).getRating())+" "
+                            +String.valueOf(posible_nodes.get(b).getLatitude())+" "+String.valueOf(posible_nodes.get(b).getLongitude()));
+                }
                 
                 //We start to add the path to the player
-                for (int y = temp_path.size() - 1; x >= 0; x--){ //we add all the arc references to the Players list
+                for (int y = temp_path.size() - 1; y >= 0; y--){ //we add all the arc references to the Players list
                     pPlayer.getChallengePath().add(temp_path.get(y)); //we add all the arcs we found
                 }
                 

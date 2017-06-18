@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.json.simple.parser.ParseException;
 import visualLogic.CityDeck;
 import visualLogic.Player;
@@ -30,15 +31,18 @@ import visualLogic.ChallengesDeck;
  * 
  */
 public class CityPoly extends javax.swing.JFrame {
-   
+
+//************************************************************************************    
     private Player Player1;
-    private Player Player2;
-    
-    
+    private Player Player2; 
+    private int FlagPlayer = 1;
     ArrayList<ChallengesDeck> challengesPlayer1 = new ArrayList<ChallengesDeck>();
-     ArrayList<ChallengesDeck> challengesPlayer2 = new ArrayList<ChallengesDeck>();
+    ArrayList<ChallengesDeck> challengesPlayer2 = new ArrayList<ChallengesDeck>();
     JsonManager JsonManager = new JsonManager();
     ProccessManagement ProccessManagement = new ProccessManagement();
+//***************************************************************************************    
+    
+    //Initialize in the constructor the fields w/ Player info
     public CityPoly() {
         initComponents();
         Player1 = playerList.get(0);
@@ -63,7 +67,7 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Player1Field = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButtonDesafios = new javax.swing.JButton();
+        challengesButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         starPlayer1 = new javax.swing.JTextField();
         estrellasLabel = new javax.swing.JLabel();
@@ -89,8 +93,8 @@ public class CityPoly extends javax.swing.JFrame {
         challenge3P2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        PruebaButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        turnPlayer1Button = new javax.swing.JButton();
+        turnPlayer2Button = new javax.swing.JButton();
         LabelMainI = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,15 +124,15 @@ public class CityPoly extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/coollogo_com-36272774.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
 
-        jButtonDesafios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/card back orange.png"))); // NOI18N
-        jButtonDesafios.setText("DESAFIOS");
-        jButtonDesafios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonDesafios.addActionListener(new java.awt.event.ActionListener() {
+        challengesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/card back orange.png"))); // NOI18N
+        challengesButton.setText("DESAFIOS");
+        challengesButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        challengesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDesafiosActionPerformed(evt);
+                challengesButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonDesafios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 60, 80));
+        getContentPane().add(challengesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 60, 80));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,16 +263,21 @@ public class CityPoly extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 950, 580));
 
-        PruebaButton.setText("Turno P1");
-        PruebaButton.addActionListener(new java.awt.event.ActionListener() {
+        turnPlayer1Button.setText("Turno P1");
+        turnPlayer1Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PruebaButtonActionPerformed(evt);
+                turnPlayer1ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(PruebaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
+        getContentPane().add(turnPlayer1Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
 
-        jButton1.setText("Turno P2");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 670, -1, -1));
+        turnPlayer2Button.setText("Turno P2");
+        turnPlayer2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                turnPlayer2ButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(turnPlayer2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 670, -1, -1));
 
         LabelMainI.setForeground(new java.awt.Color(255, 255, 255));
         LabelMainI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/RqkZEPG.jpg"))); // NOI18N
@@ -285,8 +294,9 @@ public class CityPoly extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Player1FieldActionPerformed
 
-    private void jButtonDesafiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesafiosActionPerformed
+    private void challengesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_challengesButtonActionPerformed
 
+    //Generate random challenges for both players***************************************************    
        Random randomChallenge = new Random(); 
        int ran = randomChallenge.nextInt(JsonManager.getChallengesDeck().getCards().size()-1)+1;
        challenge1P1.setText(JsonManager.getChallengesDeck().getCards().get(ran).getDescription());
@@ -306,6 +316,7 @@ public class CityPoly extends javax.swing.JFrame {
        challengesPlayer2.add(JsonManager.getChallengesDeck().getCards().get(ran3));
        challengesPlayer2.add(JsonManager.getChallengesDeck().getCards().get(ran4));
        challengesPlayer2.add(JsonManager.getChallengesDeck().getCards().get(ran5));
+    //**************************************************************************************************
        Player1.setChallenges(challengesPlayer1);
        Player2.setChallenges(challengesPlayer2);
        Player1.setStartNode(ProccessManagement.generateRandomNode());
@@ -314,11 +325,11 @@ public class CityPoly extends javax.swing.JFrame {
        System.out.println(Player1.getNickName());
        for (int b =0; b<Player1.getChallenges().size();b++)
        {
-           System.out.println(Player1.getChallenges().get(b));
-           System.out.println(Player2.getChallenges().get(b));
+         System.out.println(Player1.getChallenges().get(b));
+         System.out.println(Player2.getChallenges().get(b));
          
        }       
-    }//GEN-LAST:event_jButtonDesafiosActionPerformed
+    }//GEN-LAST:event_challengesButtonActionPerformed
 
     private void starPlayer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_starPlayer2ActionPerformed
         // TODO add your handling code here:
@@ -348,6 +359,8 @@ public class CityPoly extends javax.swing.JFrame {
     }//GEN-LAST:event_loadCardsActionPerformed
 
     private void CitiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CitiesButtonActionPerformed
+       
+        //Generate rando city from city deck and request Json from Api call************************************************************
         try {
             Random randomCity = new Random();
             int ran = randomCity.nextInt(JsonManager.getCityDeck().getCards().size()-1)+1;
@@ -384,11 +397,33 @@ public class CityPoly extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_challenge2P2ActionPerformed
 
-    private void PruebaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PruebaButtonActionPerformed
-      
+    private void turnPlayer1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnPlayer1ButtonActionPerformed
+      //Generate the shortest way to win the challenge********************************************
+        
+      if(FlagPlayer==2)
+      {
         ProccessManagement.getRoute(Player1);
         System.out.println(Player1.getChallengePath().toString());
-    }//GEN-LAST:event_PruebaButtonActionPerformed
+        FlagPlayer =1;
+      }else
+      {
+          JOptionPane.showMessageDialog(null, "Su turno ha acabado", "Turno Completado", JOptionPane.INFORMATION_MESSAGE);
+      }
+        
+    }//GEN-LAST:event_turnPlayer1ButtonActionPerformed
+
+    private void turnPlayer2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnPlayer2ButtonActionPerformed
+       if(FlagPlayer ==1)
+       {
+        ProccessManagement.getRoute(Player2);
+        System.out.println(Player1.getChallengePath().toString());
+        FlagPlayer = 2;  
+       }else
+       {
+           JOptionPane.showMessageDialog(null, "Su turno ha Acabado", "Turno completado", JOptionPane.INFORMATION_MESSAGE);
+       }
+        
+    }//GEN-LAST:event_turnPlayer2ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,18 +465,16 @@ public class CityPoly extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMainI;
     private javax.swing.JTextField Player1Field;
     private javax.swing.JTextField Player2Field;
-    private javax.swing.JButton PruebaButton;
     private javax.swing.JTextField challenge1P1;
     private javax.swing.JTextField challenge1P2;
     private javax.swing.JTextField challenge2P1;
     private javax.swing.JTextField challenge2P2;
     private javax.swing.JTextField challenge3P1;
     private javax.swing.JTextField challenge3P2;
+    private javax.swing.JButton challengesButton;
     private javax.swing.JTextField ciudadField;
     private javax.swing.JButton diceButton;
     private javax.swing.JLabel estrellasLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonDesafios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -460,5 +493,7 @@ public class CityPoly extends javax.swing.JFrame {
     private javax.swing.JTextField randomField;
     private javax.swing.JTextField starPlayer1;
     private javax.swing.JTextField starPlayer2;
+    private javax.swing.JButton turnPlayer1Button;
+    private javax.swing.JButton turnPlayer2Button;
     // End of variables declaration//GEN-END:variables
 }
