@@ -5,7 +5,7 @@
  */
 package graph;
 
-import decks.TypePlace;
+import decks.*;
 import java.util.*;
 
 /**

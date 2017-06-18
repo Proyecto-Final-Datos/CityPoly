@@ -6,7 +6,6 @@
 package graph;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  *
@@ -191,6 +190,24 @@ public class Dijkstra {
     }
     
     /**
+     * Function to set the partial weight of the nodes that aren't final and the Arc to get to it
+     * @param pNode Node to check the arcs it has
+     * @param pWeight Recursive weight 
+     */
+    public void setWeights(GraphNode pNode, double pWeight){
+        ArrayList<Arc> conections = pNode.getConections();
+        
+        for (int i = 0; i < conections.size(); i++){
+            GraphNode destiny_node = conections.get(i).getDestiny();
+            int pos_node = findNode(destiny_node); //returns the pos of the destiny node
+            if (!MinDistanceStatus.get(pos_node)){ //if the weight isn't final we change it
+                MinDistance.set(pos_node, conections.get(i).getWeight() + pWeight); // we change the min weight of the node
+                References.set(pos_node, conections.get(i)); //Bueno
+            }
+        }
+    }
+    
+    /**
      * Function to get the shortest path from one node to all the others
      */
     public void execute(){
@@ -216,25 +233,6 @@ public class Dijkstra {
             
         }
         
-    }
-    
-    /**
-     * Function to set the partial weight of the nodes that aren't final and the Arc to get to it
-     * @param pNode
-     * @param pWeight 
-     */
-    public void setWeights(GraphNode pNode, double pWeight){
-        ArrayList<Arc> conections = pNode.getConections();
-        
-        for (int i = 0; i < conections.size(); i++){
-            GraphNode destiny_node = conections.get(i).getDestiny();
-            GraphNode source_node = conections.get(i).getSource();
-            int pos_node = findNode(destiny_node); //returns the pos of the destiny node
-            if (!MinDistanceStatus.get(pos_node)){ //if the weight isn't final we change it
-                MinDistance.set(pos_node, conections.get(i).getWeight() + pWeight); // we change the min weight of the node
-                References.set(pos_node, conections.get(i)); //Bueno
-            }
-        }
     }
     
     
